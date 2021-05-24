@@ -7,7 +7,7 @@ import { useHistory, withRouter } from "react-router-dom";
 
 import { Container } from "@sberdevices/plasma-ui/components/Grid";
 import { Button, P } from "@sberdevices/plasma-ui";
-import { Display2 } from "@sberdevices/plasma-ui";
+import { Display3 } from "@sberdevices/plasma-ui";
 import { useState } from "react";
 import {
   Card,
@@ -38,17 +38,17 @@ const Home = ({ setMode, setPlayOrPractice, playOrPractice }) => {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginBottom: "2rem",
+          marginBottom: "1rem",
           marginTop: "2rem",
         }}
       >
-        <Display2>Угадай Животное</Display2>
+        <Display3>Угадай Животное</Display3>
       </div>
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          marginBottom: "2rem",
+          marginBottom: "1rem",
         }}
       >
         <Tabs
@@ -76,12 +76,15 @@ const Home = ({ setMode, setPlayOrPractice, playOrPractice }) => {
         style={{
           display: "flex",
           justifyContent: "center",
-          justifyContent: "space-around          ",
+          justifyContent: "space-around",
+          flexGrow: "1",
+          flexShrink: "1",
+          //marginBottom: "10rem",
         }}
       >
-        <Card style={{ width: "22.5rem" }}>
+        <Card style={{ width: "22.5rem", margin: "1rem" }}>
           <CardBody>
-            <CardMedia src={lion} height={"15rem"} />
+            <CardMedia src={lion} height={"12rem"} />
             <CardContent>
               <TextBox>
                 <TextBoxBigTitle>{"Сложность легкая"}</TextBoxBigTitle>
@@ -89,7 +92,7 @@ const Home = ({ setMode, setPlayOrPractice, playOrPractice }) => {
                 <TextBoxSubTitle>{"15 секунд на раздумье"}</TextBoxSubTitle>
               </TextBox>
               <Button
-                text="Погнали"
+                text="Начать"
                 view="primary"
                 size="s"
                 scaleOnInteraction={true}
@@ -105,9 +108,9 @@ const Home = ({ setMode, setPlayOrPractice, playOrPractice }) => {
             </CardContent>
           </CardBody>
         </Card>
-        <Card style={{ width: "22.5rem" }}>
+        <Card style={{ width: "22.5rem", margin: "1rem" }}>
           <CardBody>
-            <CardMedia src={opisanie} height={"15rem"} />
+            <CardMedia src={opisanie} height={"12rem"} />
             <CardContent>
               <TextBox>
                 <TextBoxBigTitle>{"Сложность средняя"}</TextBoxBigTitle>
@@ -115,7 +118,7 @@ const Home = ({ setMode, setPlayOrPractice, playOrPractice }) => {
                 <TextBoxSubTitle>{"30 секунд на раздумье"}</TextBoxSubTitle>
               </TextBox>
               <Button
-                text="Начинаем"
+                text="Начать"
                 view="primary"
                 size="s"
                 scaleOnInteraction={true}
@@ -131,9 +134,9 @@ const Home = ({ setMode, setPlayOrPractice, playOrPractice }) => {
             </CardContent>
           </CardBody>
         </Card>
-        <Card style={{ width: "22.5rem" }}>
+        <Card style={{ width: "22.5rem", margin: "1rem" }}>
           <CardBody>
-            <CardMedia src={hear} height={"15rem"} />
+            <CardMedia src={hear} height={"12rem"} />
             <CardContent>
               <TextBox>
                 <TextBoxBigTitle>{"Сложность высокая"}</TextBoxBigTitle>

@@ -1,7 +1,8 @@
 import { Container } from "@sberdevices/plasma-ui/components/Grid";
 import { Timer } from "./Timer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Row, Col } from "@sberdevices/plasma-ui";
+import useSound from "use-sound";
 
 import {
   Card,
@@ -16,101 +17,179 @@ import {
   TextBoxSubTitle,
   TextBoxBigTitle,
   TextField,
+  CardParagraph1,
+  Headline4,
 } from "@sberdevices/plasma-ui";
-const Game = ({ mode, playOrPractice }) => {
-  const [value, setValue] = useState("");
+import { IconVolumeAlt2 } from "@sberdevices/plasma-icons";
+
+const Game = ({
+  mode,
+  playOrPractice,
+  answer,
+  setAnswer,
+  generateNewAnimal,
+  processCard,
+  picture,
+  text,
+  sound,
+}) => {
   const status = ["success", "error", ""];
+
+  const [play, { stop, isPlaying }] = useSound(sound, { volume: 0.75 });
+  const [playButtonText, setPlayButtonText] = useState("Прослушать");
+  useEffect(() => {
+    generateNewAnimal();
+  }, []);
+
+  useEffect(() => {
+    if (!isPlaying) {
+      setPlayButtonText("Прослушать");
+    }
+  }, [isPlaying]);
+
+  const renderMode = (param) => {
+    switch (param) {
+      case 0:
+        return (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Card
+              style={{ width: "30rem", marginTop: "0.7rem" }}
+              tabIndex={-1}
+              outlined={false}
+              scaleOnFocus={false}
+            >
+              <CardBody>
+                <CardMedia style={{ maxHeight: "22rem" }} src={picture} />
+                <CardContent cover={cover}>
+                  <TextBox>
+                    <TextBoxBigTitle>{"Какое это животное?"}</TextBoxBigTitle>
+                  </TextBox>
+                  <TextField
+                    style={{ marginTop: "1rem" }}
+                    value={answer}
+                    label={"Ответ"}
+                    //   helperText={"Helper text"}
+                    disabled={false}
+                    status={status !== "" ? status : undefined}
+                    onChange={(v) => setAnswer(v.target.value)}
+                  />
+                  <Button
+                    style={{ marginTop: "1rem" }}
+                    onClick={() => {
+                      processCard();
+                    }}
+                  >
+                    Ответить
+                  </Button>
+                </CardContent>
+              </CardBody>
+            </Card>
+          </div>
+        );
+      case 1:
+        return (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Card
+              style={{ width: "40rem", marginTop: "4rem" }}
+              tabIndex={-1}
+              outlined={false}
+              scaleOnFocus={false}
+            >
+              <CardBody>
+                {/* <CardMedia style={{ width: "30rem" }} src={picture} /> */}
+                <CardContent cover={cover}>
+                  <TextBox>
+                    <CardParagraph1 style={{ marginTop: "0.75rem" }} lines={6}>
+                      <Headline4>
+                        <em>{text}</em>
+                      </Headline4>
+                    </CardParagraph1>
+
+                    <TextBoxBigTitle style={{ marginTop: "2rem" }}>
+                      {"Какое это животное?"}
+                    </TextBoxBigTitle>
+                  </TextBox>
+                  <TextField
+                    style={{ marginTop: "1rem" }}
+                    value={answer}
+                    label={"Ответ"}
+                    //   helperText={"Helper text"}
+                    disabled={false}
+                    status={status !== "" ? status : undefined}
+                    onChange={(v) => setAnswer(v.target.value)}
+                  />
+                  <Button
+                    style={{ marginTop: "1rem" }}
+                    onClick={() => {
+                      processCard();
+                    }}
+                  >
+                    Ответить
+                  </Button>
+                </CardContent>
+              </CardBody>
+            </Card>
+          </div>
+        );
+      case 2:
+        return (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Card
+              style={{ width: "30rem", marginTop: "4rem" }}
+              tabIndex={-1}
+              outlined={false}
+              scaleOnFocus={false}
+            >
+              <CardBody>
+                <CardContent cover={cover}>
+                  <Button
+                    style={{ marginTop: "1rem" }}
+                    onClick={() => {
+                      if (isPlaying) {
+                        stop();
+                      } else {
+                        play();
+                        setPlayButtonText("Остановить");
+                      }
+                    }}
+                    text={playButtonText}
+                    view={"primary"}
+                    contentLeft={<IconVolumeAlt2 />}
+                  />
+                  <TextBox>
+                    <TextBoxBigTitle style={{ marginTop: "1rem" }}>
+                      {"Какое животное издает этот звук?"}
+                    </TextBoxBigTitle>
+                  </TextBox>
+                  <TextField
+                    style={{ marginTop: "1rem" }}
+                    value={answer}
+                    label={"Ответ"}
+                    //   helperText={"Helper text"}
+                    disabled={false}
+                    status={status !== "" ? status : undefined}
+                    onChange={(v) => setAnswer(v.target.value)}
+                  />
+                  <Button
+                    style={{ marginTop: "1rem" }}
+                    onClick={() => {
+                      processCard();
+                    }}
+                  >
+                    Ответить
+                  </Button>
+                </CardContent>
+              </CardBody>
+            </Card>
+          </div>
+        );
+    }
+  };
+
   return (
-    <Container>
-      {/* <h1>{mode}</h1> */}
-      {playOrPractice == 0 ? (
-        <h1>Режим тренировки</h1>
-      ) : (
-        <Timer style={{ textAlign: "right" }} />
-      )}
-
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Card
-          style={{ width: "40rem" }}
-          tabIndex={-1}
-          outlined={false}
-          scaleOnFocus={false}
-        >
-          <CardBody>
-            <CardMedia src="https://ic.pics.livejournal.com/masterok/50816465/7165160/7165160_original.jpg" />
-            <CardContent cover={cover}>
-              <TextBox>
-                <TextBoxBigTitle>{"Это кто?"}</TextBoxBigTitle>
-                {/* <TextBoxBiggerTitle>{"до 230 000 ₽"}</TextBoxBiggerTitle>
-              <TextBoxSubTitle>{"На 18 месяцев, ставка 13,9%"}</TextBoxSubTitle> */}
-              </TextBox>
-
-              {/* <Row>
-                <Col type={"rel"} size={6}>
-                  <Button
-                    text="Корова"
-                    view="primary"
-                    size="s"
-                    scaleOnInteraction={true}
-                    outlined={true}
-                    stretch
-                    style={{ marginTop: "1em" }}
-                    tabIndex={-1}
-                  />
-                </Col>
-                <Col type={"rel"} size={6}>
-                  <Button
-                    text="Собака"
-                    view="primary"
-                    size="s"
-                    scaleOnInteraction={true}
-                    outlined={true}
-                    stretch
-                    style={{ marginTop: "1em" }}
-                    tabIndex={-1}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col type={"rel"} size={6}>
-                  <Button
-                    text="Курица"
-                    view="primary"
-                    size="s"
-                    scaleOnInteraction={true}
-                    outlined={true}
-                    stretch
-                    style={{ marginTop: "1em" }}
-                    tabIndex={-1}
-                  />
-                </Col>
-                <Col type={"rel"} size={6}>
-                  <Button
-                    text="Лев"
-                    view="primary"
-                    size="s"
-                    scaleOnInteraction={true}
-                    outlined={true}
-                    stretch
-                    style={{ marginTop: "1em" }}
-                    tabIndex={-1}
-                  />
-                </Col>
-              </Row> */}
-              <TextField
-                style={{ marginTop: "1rem" }}
-                value={value}
-                label={"Ответ"}
-                //   helperText={"Helper text"}
-                disabled={false}
-                status={status !== "" ? status : undefined}
-                onChange={(v) => setValue(v.target.value)}
-              />
-              <Button style={{ marginTop: "1rem" }}>Ответить</Button>
-            </CardContent>
-          </CardBody>
-        </Card>
-      </div>
+    <Container style={{ marginBottom: "10rem" }}>
+      {playOrPractice == 0 ? <></> : <Timer style={{ textAlign: "right" }} />}
+      <div>{renderMode(mode)}</div>
     </Container>
   );
 };
