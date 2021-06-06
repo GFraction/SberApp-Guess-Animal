@@ -28,10 +28,11 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     borderRadius: "1em",
     padding: "1em",
+    width: "30rem",
   },
 };
 
-export const Timer = ({}) => {
+export const Timer = ({ counter, setCounter, amountOfSolvedQuestions }) => {
   const history = useHistory();
 
   var subtitle;
@@ -39,10 +40,9 @@ export const Timer = ({}) => {
 
   function afterOpenModal() {
     subtitle.style.color = "";
-    setCounterRest(5);
+    setCounterRest(7);
   }
 
-  const [counter, setCounter] = React.useState(4);
   const [counterRest, setCounterRest] = React.useState(30);
   React.useEffect(() => {
     setCounter(counter);
@@ -77,9 +77,14 @@ export const Timer = ({}) => {
   }, [counterRest]);
   return (
     <div>
-      {counter !== 0 && <Headline2>Время: {format(counter)}</Headline2>}
+      {counter !== 0 && (
+        <Headline2 style={{ marginTop: "1rem" }}>
+          Время: {format(counter)}
+        </Headline2>
+      )}
       <div>
         <Modal
+          ariaHideApp={false}
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           style={customStyles}
@@ -88,39 +93,18 @@ export const Timer = ({}) => {
             ref={(_subtitle) => (subtitle = _subtitle)}
             style={{ textAlign: "center" }}
           >
-            К сожалению
+            Ой-ой, время вышло!
           </h2>
+          <h3
+            ref={(_subtitle) => (subtitle = _subtitle)}
+            style={{ textAlign: "center" }}
+          >
+            Правильно {amountOfSolvedQuestions.current - 1} из 10
+          </h3>
           <div style={{ textAlign: "center" }}>
-            <Headline2>вы проиграли</Headline2>
+            <Headline2>Возврат домой через</Headline2>
             <br />
             {counterRest !== 0 && <Headline2>{format(counterRest)}</Headline2>}
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Button
-              onClick={() => {
-                setIsOpen(false);
-                setCounterRest(6);
-                history.push("/");
-              }}
-            >
-              <IconHouse />
-            </Button>
-
-            {/* <Button
-              onClick={() => {
-                setIsOpen(false);
-                setCounter(counter);
-              }}
-            >
-              Продолжить
-            </Button> */}
           </div>
         </Modal>
       </div>
