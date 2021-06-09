@@ -15,9 +15,9 @@ const initializeAssistant = (getState /*: any*/) => {
   if (true) {
     return createSmartappDebugger({
       token:
-        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZWI2ZWZmYjgyODFjZTAyMTlmYWVhNjhlODk2YzVhMGMwNmI2NDk3ZTNjYjA2ODg4OTZkNDYwNzkwNjFkYTAwNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTYyMzA3NDU5MCwiaWF0IjoxNjIyOTg4MTgwLCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiMzA3NTIwYzktY2ZkMS00ODBhLWFhMGUtMGNkM2U1ZDFjMDY2Iiwic2lkIjoiZTMxODM5N2UtN2U2Mi00NDkzLWI1MGQtYmUxMmZkNTAwYjdkIn0.ORovwcOrIZ3vzuGIA8Gs3_fSNlVjvHzMURtRUAxxM7nV41km1dsVzlE4yZkmJMtquatgHX4Jc0hXYQG4by-SbaDEcqyryvTRPhZ0-W6au67diFZgfcWZdm3h6w6O8sVrXSPyfCarwbdLkK6TA1q-HWMcoKpBwntBIW7R7Cr8l2gwO2ngSvYNlzwhJxTHZRKQeUMgPNK5jZAgqlVPPDpXsOYVESDpnEusYiwmbFUndjR8bE8r9KKiUEr3qDKNwIgZE25L-m0F3PqFmXIhRTs_Htboo7hvwpQRMa1IP7mJ_D_nvZt6FWAjD5wq4PWGAeyU1DkSsB3yNSpVgj2DUxYJHh7VCa2atNU2Tt3z95LCZSg1tDLCNquxO_60qQ0EC5DzAKuaXjqgDoc3lRGqIvZbbwhAxnXrDtVeIdDK_zgxAQ42W7VeaS1JOiGmkg-qNJ7maVQvkSR7qKiPEo3javJFX0UpXvkg3ewEvm3ZII_odsF222jkwD0rkdvKZgeQ7SJJpxvhAr0ieMBxn0XP9iJwpdi0H4UvmoDb3_SAcHueg9jcr0GEVQGnXNiSmDlqKlJIOnk8q4BebYd-eA8jdm9uBbo6DY8aVI9ZjtzvGJf_RbPpP1ZahvPGXtQVdbnuWICaIObFAxLzwB_VrcTfu7HfNUfsZr2kFyxA7rbKw-RDFTA" ??
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZWI2ZWZmYjgyODFjZTAyMTlmYWVhNjhlODk2YzVhMGMwNmI2NDk3ZTNjYjA2ODg4OTZkNDYwNzkwNjFkYTAwNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTYyMzM0NTg3OCwiaWF0IjoxNjIzMjU5NDY4LCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiMTdlMmI4N2EtZGFhZC00MzIwLWE1N2ItNDQ0YzVmNDQyNTdjIiwic2lkIjoiYjZmNzEzYTQtZjM3Ny00ZjIwLWI3ODktMTNjNzY3YjJlODQ0In0.CtR1uLLctwX9ugqxToWvvx5I1t68H6A6zXBU9y8YN8Uuv7-H_jMrZVmFS5LWxow6im4RXCRA7wvAoHQWkrQ3mX-4W8VlGNLY7n6NdGXtxqUG3apdWtkX4C9QhZypE2ZEZ3aN1xoWd3ZE-fIoFfVmdmhxGyxoFdqOWG2DQCy4tso-5ev8AbyEhcDfxiJxh6nC4U-5wSsC05B2EqMagKm-H3J5x83N1QEaLLMYljEnjnCoX3MegFU9C_1n8eWeAGx1eK2tfLeLgAiRhTpxHxzipsDGsoV50vHZBGbN4rx4kitF7teS2HTlAqDMYYhBkNVUWo57dj2oDCso_0yAM1sGpOM2WT1klCAZuVsaBMsCVqQeU0VC5a_JGHbpUC0mc9cmPskxqGZx2UPaDVcCmXp4lwBerViAmiTptPN3Nxztx8UH1bdhuISy-2Id8yydYccN3rvQHZx3ucN41kJiRyvhsqvCq_7COiwiHR5U35Z8t-25t9_C_J1UJlTa52zIZjUFkNH6dHVTvMYVUzfh0H72H5jiBM1tdZ9E97kWkNmlK6n_dHWpy06yzYhIgRa1Ju148c9mHrFksqqCFPgw1twIUGZKmQoI0fWlVVS8YLE4WkYbxsr7pDZcv38XdoZ4Ifh5nv_SkDs63rlg8hUCCddHKbzNL4u1rxXwH4DZE5h8jmI" ??
         "",
-      initPhrase: `Запусти Угадай животное`,
+      initPhrase: `Запусти Отгадай животное`,
       getState,
     });
   }
@@ -146,22 +146,28 @@ function App() {
           switch (action.data) {
             case "тренировки":
               setPlayOrPractice(0);
+
               break;
             case "тренировка":
               setPlayOrPractice(0);
+
               break;
             case "игровой":
               setPlayOrPractice(1);
+
               break;
             case "игра":
               setPlayOrPractice(1);
+
               break;
             case "игры":
               setPlayOrPractice(1);
+
               break;
             default:
               break;
           }
+          break;
         case "input_answer":
           refAnswer.current = action.data;
           setAns(action.data);
@@ -175,6 +181,7 @@ function App() {
           assistant.current?.sendData({
             action: { action_id: "goneback", payload: {} },
           });
+          break;
 
         default:
           break;

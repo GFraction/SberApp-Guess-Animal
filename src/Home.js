@@ -51,7 +51,7 @@ const Home = ({
           marginTop: "2rem",
         }}
       >
-        <Display3>Угадай Животное</Display3>
+        <Display3>Отгадай Животное</Display3>
       </div>
       <div
         style={{
@@ -84,7 +84,7 @@ const Home = ({
       <div
         style={{
           flexDirection: isRowBased ? "row" : "column",
-
+          marginBottom: isRowBased ? "0rem" : "10rem",
           display: "flex",
           //justifyContent: "center",
           justifyContent: "center",
